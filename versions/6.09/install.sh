@@ -73,8 +73,6 @@ Install_App()
 		cd ${APP_DIR} && tar -zxvf fastdfs-V${VERSION}.tar.gz
 	fi
 
-
-
 	if [ ! -d  /etc/fdfs ];then
 		cd ${APP_DIR}/fastdfs-${VERSION} && ./make.sh && ./make.sh install
 
@@ -88,9 +86,15 @@ Install_App()
 
 Uninstall_App()
 {
-	# if [ -f $serverPath/fastdfs/initd/fastdfs ];then
-	# 	$serverPath/fastdfs/initd/fastdfs stop
-	# fi
+	if [ -f $serDir/fdfs_storaged.service ];then
+		systemctl stop fdfs_storaged
+		rm -rf $serDir/fdfs_storaged.service
+	fi
+
+	if [ -f $serDir/fdfs_trackerd.service ];then
+		systemctl stop fdfs_trackerd
+		rm -rf $serDir/fdfs_trackerd.service
+	fi
 
 	rm -rf $serverPath/fastdfs
 	echo "uninstall fastdfs" > $install_tmp
