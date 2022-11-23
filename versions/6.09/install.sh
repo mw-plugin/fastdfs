@@ -70,9 +70,9 @@ Install_App()
 
 	if [ ! -d  /etc/fdfs ];then
 		cd ${APP_DIR}/fastdfs-${VERSION} && ./make.sh && ./make.sh install
+		echo $VERSION > $serverPath/fastdfs/version.pl
+		echo 'install fastdfs' > $install_tmp
 	fi
-	echo $VERSION > $serverPath/fastdfs/version.pl
-	echo 'install fastdfs' > $install_tmp
 }
 
 Uninstall_App()
