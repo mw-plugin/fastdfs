@@ -125,7 +125,8 @@ def ftOp(method):
     services = getServiceName()
 
     for s in services:
-        data = mw.execShell('systemctl ' + method + ' ' + s)
+        cmd = 'systemctl ' + method + ' ' + s
+        data = mw.execShell(cmd)
         if data[1] != '':
             return 'fail'
 
