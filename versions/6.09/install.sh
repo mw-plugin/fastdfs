@@ -17,6 +17,7 @@ OSNAME_ID=`cat /etc/*-release | grep VERSION_ID | awk -F = '{print $2}' | awk -F
 Install_App_libfastcommon()
 {
 	if [ ! -d ${serverPath}/source/fastdfs/libfastcommon ];then
+		cd ${serverPath}/source/fastdfs
 		git clone https://github.com/happyfish100/libfastcommon
 	fi
 
