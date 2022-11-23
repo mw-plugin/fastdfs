@@ -53,7 +53,7 @@ Install_App()
 
 	echo '正在安装脚本文件...' > $install_tmp
 	APP_DIR=${serverPath}/source/fastdfs
-	
+
 	mkdir -p $serverPath/fastdfs
 	mkdir -p $APP_DIR
 
@@ -75,10 +75,6 @@ Install_App()
 
 	if [ ! -d  /etc/fdfs ];then
 		cd ${APP_DIR}/fastdfs-${VERSION} && ./make.sh && ./make.sh install
-
-		cp -rf ${APP_DIR}/fastdfs-${VERSION}/systemd/fdfs_storaged.service $serDir
-		cp -rf ${APP_DIR}/fastdfs-${VERSION}/systemd/fdfs_trackerd.service $serDir
-
 		echo $VERSION > $serverPath/fastdfs/version.pl
 		echo 'install fastdfs' > $install_tmp
 	fi

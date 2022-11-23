@@ -110,6 +110,13 @@ def status():
 
 
 def initDreplace():
+
+    conf_list = ['client.conf', 'storage.conf',
+                 'storage_ids.conf', 'tracker.conf']
+
+    for cl in conf_list:
+        pass
+
     return ''
 
 
