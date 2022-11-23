@@ -28,6 +28,21 @@ Install_App_libfastcommon()
 }
 
 
+Install_App_libserverframe()
+{
+	if [ ! -d ${serverPath}/source/fastdfs/libserverframe ];then
+		cd ${serverPath}/source/fastdfs
+		git clone https://github.com/happyfish100/libserverframe
+	fi
+
+	if [ ! -d /usr/include/libserverframe ];then
+		cd ${serverPath}/source/fastdfs/libserverframe
+		./make.sh && ./make.sh install
+	fi
+}
+
+
+
 VERSION=6.09
 Install_App()
 {
