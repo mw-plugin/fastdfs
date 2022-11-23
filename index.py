@@ -110,82 +110,54 @@ def status():
 
 
 def initDreplace():
-
-    file_tpl = getInitDTpl()
-    service_path = os.path.dirname(os.getcwd())
-
-    initD_path = getServerDir() + '/init.d'
-    if not os.path.exists(initD_path):
-        os.mkdir(initD_path)
-    file_bin = initD_path + '/' + getPluginName()
-
-    # initd replace
-    if not os.path.exists(file_bin):
-        content = mw.readFile(file_tpl)
-        content = contentReplace(content)
-        mw.writeFile(file_bin, content)
-        mw.execShell('chmod +x ' + file_bin)
-
-    # config replace
-    conf_bin = getConf()
-    if not os.path.exists(conf_bin):
-        conf_content = mw.readFile(getConfTpl())
-        conf_content = contentReplace(conf_content)
-        mw.writeFile(getServerDir() + '/haproxy.conf', conf_content)
-
-    # systemd
-    systemDir = mw.systemdCfgDir()
-    systemService = systemDir + '/haproxy.service'
-    systemServiceTpl = getPluginDir() + '/init.d/haproxy.service.tpl'
-    if os.path.exists(systemDir) and not os.path.exists(systemService):
-        service_path = mw.getServerDir()
-        se_content = mw.readFile(systemServiceTpl)
-        se_content = se_content.replace('{$SERVER_PATH}', service_path)
-        mw.writeFile(systemService, se_content)
-        mw.execShell('systemctl daemon-reload')
-
-    return file_bin
+    return ''
 
 
-def haOp(method):
-    file = initDreplace()
+def getServiceName():
+    return ['fdfs_storaged', 'fdfs_trackerd']
 
-    if not mw.isAppleSystem():
-        data = mw.execShell('systemctl ' + method + ' haproxy')
-        if data[1] == '':
-            return 'ok'
+
+def ftOp(method):
+    if mw.isAppleSystem():
         return 'fail'
 
-    data = mw.execShell(file + ' ' + method)
-    if data[1] == '':
-        return 'ok'
-    return data[1]
+    file = initDreplace()
+    services = getServiceName()
+
+    for s in services:
+        data = mw.execShell('systemctl ' + method + ' ' + s)
+        if data[1] != '':
+            return 'fail'
+
+    return 'ok'
 
 
 def start():
-    return haOp('start')
+    return ftOp('start')
 
 
 def stop():
-    return haOp('stop')
+    return ftOp('stop')
 
 
 def restart():
-    return haOp('restart')
+    return ftOp('restart')
 
 
 def reload():
-    return haOp('reload')
+    return ftOp('reload')
 
 
 def initdStatus():
     if mw.isAppleSystem():
         return "Apple Computer does not support"
 
-    shell_cmd = 'systemctl status haproxy | grep loaded | grep "enabled;"'
-    data = mw.execShell(shell_cmd)
-    if data[0] == '':
-        return 'fail'
+    services = getServiceName()
+    for s in services:
+        shell_cmd = 'systemctl status ' + s + ' | grep loaded | grep "enabled;"'
+        data = mw.execShell(shell_cmd)
+        if data[0] == '':
+            return 'fail'
     return 'ok'
 
 
@@ -193,7 +165,9 @@ def initdInstall():
     if mw.isAppleSystem():
         return "Apple Computer does not support"
 
-    mw.execShell('systemctl enable haproxy')
+    services = getServiceName()
+    for s in services:
+        mw.execShell('systemctl enable ' + s)
     return 'ok'
 
 
@@ -201,7 +175,9 @@ def initdUinstall():
     if mw.isAppleSystem():
         return "Apple Computer does not support"
 
-    mw.execShell('systemctl disable haproxy')
+    services = getServiceName()
+    for s in services:
+        mw.execShell('systemctl disable ' + s)
     return 'ok'
 
 

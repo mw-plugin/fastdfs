@@ -41,6 +41,10 @@ Install_App_libserverframe()
 	fi
 }
 
+serDir=/usr/lib/systemd/system
+if [ ! -d $serDir ];then
+	serDir=/lib/systemd/system
+fi
 
 
 VERSION=6.09
@@ -69,8 +73,14 @@ Install_App()
 		cd ${APP_DIR} && tar -zxvf fastdfs-V${VERSION}.tar.gz
 	fi
 
+
+
 	if [ ! -d  /etc/fdfs ];then
 		cd ${APP_DIR}/fastdfs-${VERSION} && ./make.sh && ./make.sh install
+
+		cp -rf ${APP_DIR}/fastdfs-${VERSION}/systemd/fdfs_storaged.service $serDir
+		cp -rf ${APP_DIR}/fastdfs-${VERSION}/systemd/fdfs_trackerd.service $serDir
+
 		echo $VERSION > $serverPath/fastdfs/version.pl
 		echo 'install fastdfs' > $install_tmp
 	fi

@@ -8,7 +8,6 @@ rootPath=$(dirname "$rootPath")
 serverPath=$(dirname "$rootPath")
 install_tmp=${rootPath}/tmp/mw_install.pl
 
-
 action=$1
 type=$2
 
@@ -23,20 +22,27 @@ if [ ! -d $curPath/versions/$2 ];then
 fi
 
 if [ "${action}" == "uninstall" ];then
-	echo ""
-	# if [ -f /usr/lib/systemd/system/haproxy.service ] || [ -f /lib/systemd/system/haproxy.service ];then
-	# 	systemctl stop haproxy
-	# 	systemctl disable haproxy
-	# 	rm -rf /usr/lib/systemd/system/haproxy.service
-	# 	rm -rf /lib/systemd/system/haproxy.service
-	# 	systemctl daemon-reload
-	# fi
+
+	serDir=/usr/lib/systemd/system
+	if [ ! -d $serDir ];then
+		serDir=/lib/systemd/system
+	fi
+
+	if [ ! -d $serDir ];then
+		echo "pass"
+	else
+		systemctl stop fdfs_storaged
+	  	systemctl stop fdfs_trackerd
+	  	rm -rf $serDir/fdfs_storaged.service
+	  	rm -rf $serDir/fdfs_trackerd.service
+	  	systemctl daemon-reload
+	fi
 fi
 
 sh -x $curPath/versions/$2/install.sh $1
 
-# if [ "${action}" == "install" ] && [ -d $serverPath/haproxy ];then
-# 	#初始化 
-# 	cd ${rootPath} && python3 ${rootPath}/plugins/haproxy/index.py start ${type}
-# 	cd ${rootPath} && python3 ${rootPath}/plugins/haproxy/index.py initd_install ${type}
-# fi
+if [ "${action}" == "install" ] && [ -d $serverPath/fastdfs ];then
+	#初始化 
+	cd ${rootPath} && python3 ${rootPath}/plugins/fastdfs/index.py start ${type}
+	cd ${rootPath} && python3 ${rootPath}/plugins/fastdfs/index.py initd_install ${type}
+fi
