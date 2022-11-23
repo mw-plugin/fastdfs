@@ -14,11 +14,9 @@ bash ${rootPath}/scripts/getos.sh
 OSNAME=`cat ${rootPath}/data/osname.pl`
 OSNAME_ID=`cat /etc/*-release | grep VERSION_ID | awk -F = '{print $2}' | awk -F "\"" '{print $2}'`
 
-
-
 Install_App_libfastcommon()
 {
-	if [ ! -d ${serverPath}/source/fa/libfastcommon ];then
+	if [ ! -d ${serverPath}/source/fastdfs/libfastcommon ];then
 		git clone https://github.com/happyfish100/libfastcommon
 	fi
 
@@ -38,7 +36,10 @@ Install_App()
 	APP_DIR=${serverPath}/source/fastdfs
 
 	mkdir -p $APP_DIR
-	
+
+	Install_App_libfastcommon
+
+	# wget -O /www/server/source/fastdfs/fastdfs-V6.09.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V6.09.tar.gz
 	if [ ! -f ${APP_DIR}/fastdfs-${VERSION}.tar.gz ];then
 		if [ $sysName == 'Darwin' ]; then
 			wget -O ${APP_DIR}/fastdfs-V${VERSION}.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
@@ -47,9 +48,6 @@ Install_App()
 		fi
 	fi
 
-	if [ ! -f ${APP_DIR}/fastdfs-${VERSION}.tar.gz ];then
-		curl -sSLo ${APP_DIR}/fastdfs-V${VERSION}.tar.gz https://gitee.com/fastdfs100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
-	fi
 
 	cd ${APP_DIR} && tar -zxvf fastdfs-V${VERSION}.tar.gz
 
