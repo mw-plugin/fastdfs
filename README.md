@@ -9,5 +9,5 @@ FastDFS是一款轻量级的开源分布式文件系统，功能包括：文件�
 ## 安装脚本
 
 ```
-cd /www/server/mdserver-web/plugins && rm -rf fastdfs && git clone https://github.com/mw-plugin/fastdfs && cd fastdfs && rm -rf .git && cd /www/server/mdserver-web/plugins/fastdfs && bash install.sh install
+cd /www/server/mdserver-web/plugins && rm -rf fastdfs && git clone https://github.com/mw-plugin/fastdfs && cd fastdfs && rm -rf .git && cd /www/server/mdserver-web/plugins/fastdfs && bash install.sh install 6.09
 ```
