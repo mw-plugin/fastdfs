@@ -15,6 +15,20 @@ OSNAME=`cat ${rootPath}/data/osname.pl`
 OSNAME_ID=`cat /etc/*-release | grep VERSION_ID | awk -F = '{print $2}' | awk -F "\"" '{print $2}'`
 
 
+
+Install_App_libfastcommon()
+{
+	if [ ! -d ${serverPath}/source/fa/libfastcommon ];then
+		git clone https://github.com/happyfish100/libfastcommon
+	fi
+
+	if [ ! -d /usr/include/fastcommon ];then
+		cd ${serverPath}/libfastcommon
+		./make.sh && ./make.sh install
+	fi
+}
+
+
 VERSION=6.09
 Install_App()
 {
@@ -27,21 +41,21 @@ Install_App()
 	
 	if [ ! -f ${APP_DIR}/fastdfs-${VERSION}.tar.gz ];then
 		if [ $sysName == 'Darwin' ]; then
-			wget -O ${APP_DIR}/fastdfs-${VERSION}.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
+			wget -O ${APP_DIR}/fastdfs-V${VERSION}.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
 		else
-			curl -sSLo ${APP_DIR}/fastdfs-${VERSION}.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
+			curl -sSLo ${APP_DIR}/fastdfs-V${VERSION}.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
 		fi
 	fi
 
 	if [ ! -f ${APP_DIR}/fastdfs-${VERSION}.tar.gz ];then
-		curl -sSLo ${APP_DIR}/fastdfs-${VERSION}.tar.gz https://gitee.com/fastdfs100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
+		curl -sSLo ${APP_DIR}/fastdfs-V${VERSION}.tar.gz https://gitee.com/fastdfs100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
 	fi
 
-	cd ${APP_DIR} && tar -zxvf fastdfs-${VERSION}.tar.gz
+	cd ${APP_DIR} && tar -zxvf fastdfs-V${VERSION}.tar.gz
 
 
 	echo $MIN_VERSION > $serverPath/fastdfs/version.pl
-	echo 'Install_HA' > $install_tmp
+	echo 'install fastdfs' > $install_tmp
 }
 
 Uninstall_App()
@@ -51,7 +65,7 @@ Uninstall_App()
 	# fi
 
 	rm -rf $serverPath/fastdfs
-	echo "Uninstall_HA" > $install_tmp
+	echo "uninstall fastdfs" > $install_tmp
 }
 
 action=$1
