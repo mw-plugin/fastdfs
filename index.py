@@ -35,7 +35,7 @@ def getInitDFile():
 
 
 def getConfTpl():
-    path = getPluginDir() + "/conf/haproxy.conf"
+    path = getPluginDir() + "/conf/fastdfs.conf"
     return path
 
 
