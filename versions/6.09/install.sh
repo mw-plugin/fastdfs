@@ -49,8 +49,11 @@ Install_App()
 		fi
 	fi
 
+	if [ ! -d {APP_DIR}/fastdfs-${VERSION} ];then
+		cd ${APP_DIR} && tar -zxvf fastdfs-V${VERSION}.tar.gz
+	fi
 
-	cd ${APP_DIR} && tar -zxvf fastdfs-V${VERSION}.tar.gz
+	cd {APP_DIR}/fastdfs-${VERSION} && ./make.sh && ./make.sh install
 
 
 	echo $MIN_VERSION > $serverPath/fastdfs/version.pl
