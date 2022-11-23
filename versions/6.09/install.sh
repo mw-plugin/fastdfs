@@ -21,7 +21,7 @@ Install_App_libfastcommon()
 	fi
 
 	if [ ! -d /usr/include/fastcommon ];then
-		cd ${serverPath}/libfastcommon
+		cd ${serverPath}/source/fastdfs/libfastcommon
 		./make.sh && ./make.sh install
 	fi
 }
