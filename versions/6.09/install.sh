@@ -54,6 +54,7 @@ Install_App()
 	mkdir -p $APP_DIR
 
 	Install_App_libfastcommon
+	Install_App_libserverframe
 
 	# wget -O /www/server/source/fastdfs/fastdfs-V6.09.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V6.09.tar.gz
 	if [ ! -f ${APP_DIR}/fastdfs-${VERSION}.tar.gz ];then
