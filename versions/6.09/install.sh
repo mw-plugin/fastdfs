@@ -35,8 +35,8 @@ Install_App_libserverframe()
 		git clone https://github.com/happyfish100/libserverframe
 	fi
 
-	if [ ! -d /usr/include/libserverframe ];then
-		cd ${serverPath}/source/fastdfs/libserverframe
+	if [ ! -d /usr/include/sf ];then
+		cd ${serverPath}/source/fastdfs/sf
 		./make.sh && ./make.sh install
 	fi
 }
