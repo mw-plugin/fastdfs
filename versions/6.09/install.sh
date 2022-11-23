@@ -52,9 +52,9 @@ Install_App()
 {
 
 	echo '正在安装脚本文件...' > $install_tmp
-	mkdir -p $serverPath/fastdfs
 	APP_DIR=${serverPath}/source/fastdfs
-
+	
+	mkdir -p $serverPath/fastdfs
 	mkdir -p $APP_DIR
 
 	Install_App_libfastcommon
