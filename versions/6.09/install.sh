@@ -96,6 +96,9 @@ Uninstall_App()
 		rm -rf $serDir/fdfs_trackerd.service
 	fi
 
+	rm -rf /usr/include/fastcommon
+	rm -rf /usr/include/sf
+
 	rm -rf $serverPath/fastdfs
 	echo "uninstall fastdfs" > $install_tmp
 }
