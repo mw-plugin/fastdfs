@@ -36,7 +36,7 @@ Install_App_libserverframe()
 	fi
 
 	if [ ! -d /usr/include/sf ];then
-		cd ${serverPath}/source/fastdfs/sf
+		cd ${serverPath}/source/fastdfs/libserverframe
 		./make.sh && ./make.sh install
 	fi
 }
