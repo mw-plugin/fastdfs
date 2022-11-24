@@ -51,6 +51,8 @@ VERSION=6.09
 Install_App()
 {
 
+	Uninstall_App
+	
 	echo '正在安装脚本文件...' > $install_tmp
 	APP_DIR=${serverPath}/source/fastdfs
 
