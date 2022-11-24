@@ -1,4 +1,4 @@
-function spPostMin(method, args, callback){
+function ftPostMin(method, args, callback){
 
     var req_data = {};
     req_data['name'] = 'fastdfs';
@@ -20,7 +20,7 @@ function spPostMin(method, args, callback){
     },'json'); 
 }
 
-function spPost(method, args, callback){
+function ftPost(method, args, callback){
     var loadT = layer.msg('正在获取...', { icon: 16, time: 0, shade: 0.3 });
     spPostMin(method,args,function(data){
         layer.close(loadT);
@@ -50,4 +50,21 @@ function secToTime(s) {
     }
     return t;
 }
+
+
+function ftEdit(){
+    ftPost('ft_edit',{} , function(data){
+        var rdata = $.parseJSON(data.data);
+        var edit = '<p class="status">通用的手动编辑:</p>';
+        var c = '';
+        for (var i = 0; i < rdata.length; i++) {
+            c+='<button class="btn btn-default btn-sm" onclick="onlineEditFile(0,\''+rdata[i]['path']+'\');">'+rdata[i]['name']+'</button>';
+        }
+
+        edit +='<div class="sfm-opt">'+c+'</div>'; 
+        $(".soft-man-con").html(edit);
+    });
+    
+}
+
 

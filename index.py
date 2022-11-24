@@ -116,6 +116,14 @@ def status():
     return 'start'
 
 
+def getConfNameList():
+    return ['client.conf', 'storage.conf', 'storage_ids.conf', 'tracker.conf']
+
+
+def getServiceName():
+    return ['fdfs_storaged', 'fdfs_trackerd']
+
+
 def initDreplace():
     storage_dir = '/www/fastdfs/data'
     if os.path.exists(storage_dir):
@@ -125,15 +133,13 @@ def initDreplace():
     if os.path.exists(log_dir):
         mw.execShell('mkdir -p ' + log_dir)
 
+    conf_dir = getServerDir() + '/conf'
+    if not os.path.exists(conf_dir):
+        mw.execShell('mkdir -p ' + conf_dir)
+
     install_ok = getServerDir() + '/install.pl'
     if not os.path.exists(install_ok):
-        conf_list = ['client.conf', 'storage.conf',
-                     'storage_ids.conf', 'tracker.conf']
-
-        conf_dir = getServerDir() + '/conf'
-        if not os.path.exists(conf_dir):
-            mw.execShell('mkdir -p ' + conf_dir)
-
+        conf_list = getConfNameList()
         for cl in conf_list:
             pcfg = getServerDir() + '/conf/' + cl
             pcfg_tpl = getPluginDir() + '/conf/' + cl
@@ -152,10 +158,6 @@ def initDreplace():
         mw.execShell('systemctl daemon-reload')
         # mw.writeFile(install_ok, 'ok')
     return ''
-
-
-def getServiceName():
-    return ['fdfs_storaged', 'fdfs_trackerd']
 
 
 def ftOp(method):
@@ -232,12 +234,16 @@ def runLog():
     return log
 
 
-def getPort():
-    path = getConf()
-    content = mw.readFile(path)
-    rep = 'listen\s*=\s*(.*)'
-    tmp = re.search(rep, content)
-    return tmp.groups()[0]
+def ftEdit():
+    conf_list = getConfNameList()
+    rdata = []
+    cpath = getServerDir() + "/conf"
+    for x in conf_list:
+        tmp = {}
+        tmp['name'] = x
+        tmp['path'] = cpath + '/' + x
+        rdata.append(tmp)
+    return mw.returnJson(True, 'ok', rdata)
 
 
 if __name__ == "__main__":
@@ -266,7 +272,7 @@ if __name__ == "__main__":
         print(readConfigTpl())
     elif func == 'run_log':
         print(runLog())
-    elif func == 'query_log':
-        print(queryLog())
+    elif func == 'ft_edit':
+        print(ftEdit())
     else:
         print('error')
