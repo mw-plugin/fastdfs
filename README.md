@@ -17,5 +17,11 @@ cd /www/server/mdserver-web/plugins && rm -rf fastdfs && git clone https://githu
 - 加入fastdfs-nginx-module模块
 
 ```
+安装后需要修改/etc/fdfs/mod_fastdfs.conf配置
+tracker_server=xxxx:22122
+根据使用修改。
+```
+
+```
 curl -fsSL https://raw.githubusercontent.com/mw-plugin/fastdfs-nginx-module/main/installl.sh | bash
 ```
