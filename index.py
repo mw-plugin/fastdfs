@@ -110,7 +110,7 @@ def contentReplace(content):
 
 def status():
     data = mw.execShell(
-        "ps -ef|grep fdfs_storaged |grep -v grep | grep -v python | awk '{print $2}'")
+        "ps -ef|grep fdfs |grep -v grep | grep -v python | awk '{print $2}'")
     if data[0] == '':
         return 'stop'
     return 'start'
@@ -125,7 +125,7 @@ def getServiceName():
 
 
 def initDreplace():
-    storage_dir = '/www/fastdfs/data'
+    storage_dir = '/www/fastdfs/store1'
     if os.path.exists(storage_dir):
         mw.execShell('mkdir -p ' + storage_dir)
 
