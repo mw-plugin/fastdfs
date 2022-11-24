@@ -110,6 +110,10 @@ def status():
 
 
 def initDreplace():
+    storage_dir = '/www/fastdfs'
+    if os.path.exists(storage_dir):
+        mw.execShell('mkdir -p ' + storage_dir)
+
     install_ok = getServerDir() + '/install.pl'
     if not os.path.exists(install_ok):
         conf_list = ['client.conf', 'storage.conf',
