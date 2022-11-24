@@ -70,7 +70,7 @@ function ftEdit(){
 
 function readme(){
     var readme = '<ul class="help-info-text c7">';
-    readme += '<li>检查端口: 22122, 是否放开</li>';
+    readme += '<li>检查端口: 22122, 23000是否放开</li>';
     readme += '</ul>';
     $('.soft-man-con').html(readme);   
 }
