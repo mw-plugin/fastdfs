@@ -22,7 +22,7 @@ function ftPostMin(method, args, callback){
 
 function ftPost(method, args, callback){
     var loadT = layer.msg('正在获取...', { icon: 16, time: 0, shade: 0.3 });
-    spPostMin(method,args,function(data){
+    ftPostMin(method,args,function(data){
         layer.close(loadT);
         if(typeof(callback) == 'function'){
             callback(data);
