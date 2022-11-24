@@ -52,7 +52,7 @@ Install_App()
 {
 
 	Uninstall_App
-	
+
 	echo '正在安装脚本文件...' > $install_tmp
 	APP_DIR=${serverPath}/source/fastdfs
 
@@ -77,11 +77,11 @@ Install_App()
 
 	if [ ! -d /etc/fdfs ];then
 		cd ${APP_DIR}/fastdfs-${VERSION} && ./make.sh && ./make.sh install
-		echo $VERSION > $serverPath/fastdfs/version.pl
 		echo 'install fastdfs' > $install_tmp
 	else 
 		echo "fastdfs already install"
 	fi
+	echo $VERSION > $serverPath/fastdfs/version.pl
 
 	rm -rf ${APP_DIR}/fastdfs-${VERSION}
 	rm -rf ${APP_DIR}/fastdfs-V${VERSION}.tar.gz
