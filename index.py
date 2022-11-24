@@ -137,7 +137,7 @@ def initDreplace():
             content = contentReplace(content)
             mw.writeFile(pcfg, content)
 
-        conf_service_list = ['fdfs_storaged.service', 'fdfs_trackerd.service']
+        conf_service_list = ['fdfs_trackerd.service', 'fdfs_storaged.service']
         for cl_ll in conf_service_list:
             pser_tpl = getPluginDir() + '/init.d/' + cl_ll
             pser = mw.systemdCfgDir() + '/' + cl_ll
