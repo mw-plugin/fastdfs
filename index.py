@@ -103,6 +103,7 @@ def contentReplace(content):
         '{$SERVER_APP}', service_path + '/' + getPluginName())
 
     content = content.replace('{$STORAGED_DIR}', '/www/fastdfs')
+    content = content.replace('{$DEFAULT_IP}', mw.getHostAddr())
 
     return content
 
