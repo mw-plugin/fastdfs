@@ -145,7 +145,7 @@ def initDreplace():
             content = contentReplace(content)
             print(pser)
             mw.writeFile(pser, content)
-        # mw.execShell('systemctl daemon-reload')
+        mw.execShell('systemctl daemon-reload')
         # mw.writeFile(install_ok, 'ok')
     return ''
 
