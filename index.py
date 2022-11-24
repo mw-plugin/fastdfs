@@ -128,7 +128,7 @@ def initDreplace():
             pcfg = getServerDir() + '/conf/' + cl
             pcfg_tpl = getPluginDir() + '/conf/' + cl
             content = mw.readFile(pcfg_tpl)
-            contentReplace(content)
+            content = contentReplace(content)
             mw.writeFile(pcfg, content)
 
         conf_service_list = ['fdfs_storaged.service', 'fdfs_trackerd.service']
@@ -136,7 +136,7 @@ def initDreplace():
             pser_tpl = getPluginDir() + '/init.d/' + cl_ll
             pser = mw.systemdCfgDir() + '/' + cl_ll
             content = mw.readFile(pser_tpl)
-            contentReplace(content)
+            content = contentReplace(content)
             mw.writeFile(pser, content)
         mw.execShell('systemctl daemon-reload')
         mw.writeFile(install_ok, 'ok')
