@@ -40,7 +40,7 @@ def getConfTpl():
 
 
 def getConf():
-    path = getServerDir() + "/haproxy.conf"
+    path = getServerDir() + "/storage.conf"
     return path
 
 
@@ -219,7 +219,7 @@ def initdUinstall():
 def runLog():
     path = getConf()
     content = mw.readFile(path)
-    rep = 'log\s*=\s*(.*)'
+    rep = 'base_path\s*=\s*(.*)'
     tmp = re.search(rep, content)
     return tmp.groups()[0]
 
