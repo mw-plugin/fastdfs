@@ -97,7 +97,7 @@ def contentReplace(content):
     service_path = mw.getServerDir()
     content = content.replace('{$ROOT_PATH}', mw.getRootDir())
     content = content.replace('{$SERVER_PATH}', service_path)
-    content = content.replace('{$SERVER_APP}', service_path + '/haproxy')
+    content = content.replace('{$SERVER_APP}', service_path + '/fastdfs')
     return content
 
 
@@ -110,13 +110,30 @@ def status():
 
 
 def initDreplace():
+    install_ok = getServerDir() + '/install.pl'
+    if not os.path.exists(install_ok):
+        conf_list = ['client.conf', 'storage.conf',
+                     'storage_ids.conf', 'tracker.conf']
 
-    conf_list = ['client.conf', 'storage.conf',
-                 'storage_ids.conf', 'tracker.conf']
+        conf_dir = getServerDir() + '/conf/' + cl
+        if not os.path.exists(conf_dir):
+            mw.execShell('mkdir -p ' + conf_dir)
 
-    for cl in conf_list:
-        pass
+        for cl in conf_list:
+            pcfg = getServerDir() + '/conf/' + cl
+            pcfg_tpl = getPluginDir() + '/conf/' + cl
+            content = mw.readFile(pcfg_tpl)
+            contentcontentReplace(content)
+            mw.writeFile(pcfg, content)
 
+        conf_service_list = ['fdfs_storaged.service', 'fdfs_trackerd.service']
+        for cl in conf_service_list:
+            pser_tpl = getPluginDir() + '/init.d/' + cl
+            pser = mw.systemdCfgDir() + '/' + cl
+            content = mw.readFile(pser_tpl)
+            contentcontentReplace(content)
+            mw.writeFile(pser, content)
+        mw.execShell('systemctl daemon-reload')
     return ''
 
 
@@ -128,9 +145,9 @@ def ftOp(method):
     if mw.isAppleSystem():
         return 'fail'
 
-    file = initDreplace()
-    services = getServiceName()
+    initDreplace()
 
+    services = getServiceName()
     for s in services:
         cmd = 'systemctl ' + method + ' ' + s
         data = mw.execShell(cmd)
