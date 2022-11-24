@@ -102,7 +102,7 @@ def contentReplace(content):
     content = content.replace(
         '{$SERVER_APP}', service_path + '/' + getPluginName())
 
-    content = content.replace('{$STORAGED_DIR}', '/www/fastdfs')
+    content = content.replace('{$STORAGED_DIR}', getFtDir())
     content = content.replace('{$DEFAULT_IP}', mw.getHostAddr())
 
     return content
@@ -116,6 +116,10 @@ def status():
     return 'start'
 
 
+def getFtDir():
+    return '/www/fastdfs'
+
+
 def getConfNameList():
     return ['client.conf', 'storage.conf', 'storage_ids.conf', 'tracker.conf']
 
@@ -125,7 +129,7 @@ def getServiceName():
 
 
 def initDreplace():
-    storage_dir = '/www/fastdfs/store1'
+    storage_dir = getFtDir() + '/store1'
     if not os.path.exists(storage_dir):
         mw.execShell('mkdir -p ' + storage_dir)
 
