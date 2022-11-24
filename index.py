@@ -151,6 +151,10 @@ def initDreplace():
             content = contentReplace(content)
             mw.writeFile(pcfg, content)
 
+            pcfg_default = '/etc/fdfs/' + cl
+            if os.path.exists(pcfg_default):
+                mw.writeFile(pcfg_default, content)
+
         conf_service_list = ['fdfs_trackerd.service', 'fdfs_storaged.service']
         for cl_ll in conf_service_list:
             pser_tpl = getPluginDir() + '/init.d/' + cl_ll
