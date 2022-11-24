@@ -78,8 +78,11 @@ Install_App()
 		echo $VERSION > $serverPath/fastdfs/version.pl
 		echo 'install fastdfs' > $install_tmp
 	else 
-		echo "already install"
+		echo "fastdfs already install"
 	fi
+
+	rm -rf ${APP_DIR}/fastdfs-${VERSION}
+	rm -rf ${APP_DIR}/fastdfs-V${VERSION}.tar.gz
 }
 
 Uninstall_App()
