@@ -126,12 +126,12 @@ def getServiceName():
 
 def initDreplace():
     storage_dir = '/www/fastdfs/store1'
-    if os.path.exists(storage_dir):
+    if not os.path.exists(storage_dir):
         mw.execShell('mkdir -p ' + storage_dir)
 
-    log_dir = getServerDir() + '/logs'
-    if os.path.exists(log_dir):
-        mw.execShell('mkdir -p ' + log_dir)
+    # log_dir = getServerDir() + '/logs'
+    # if os.path.exists(log_dir):
+    #     mw.execShell('mkdir -p ' + log_dir)
 
     conf_dir = getServerDir() + '/conf'
     if not os.path.exists(conf_dir):
