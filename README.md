@@ -14,8 +14,8 @@ cd /www/server/mdserver-web/plugins && rm -rf fastdfs && git clone https://githu
 
 ## 重新编译安装OpenResty
 
-- 
+- 加入fastdfs-nginx-module模块
 
 ```
-
+curl -fsSL https://raw.githubusercontent.com/mw-plugin/fastdfs-nginx-module/main/installl.sh | bash
 ```
