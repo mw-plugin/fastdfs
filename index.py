@@ -113,7 +113,7 @@ def status():
 
 
 def initDreplace():
-    storage_dir = '/www/fastdfs'
+    storage_dir = '/www/fastdfs/data'
     if os.path.exists(storage_dir):
         mw.execShell('mkdir -p ' + storage_dir)
 
