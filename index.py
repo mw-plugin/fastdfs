@@ -115,6 +115,10 @@ def initDreplace():
     if os.path.exists(storage_dir):
         mw.execShell('mkdir -p ' + storage_dir)
 
+    log_dir = getServerDir() + '/logs'
+    if os.path.exists(log_dir):
+        mw.execShell('mkdir -p ' + log_dir)
+
     install_ok = getServerDir() + '/install.pl'
     if not os.path.exists(install_ok):
         conf_list = ['client.conf', 'storage.conf',
