@@ -86,6 +86,10 @@ Install_App()
 		cp -rf ${APP_DIR}/fastdfs-${VERSION}/conf/http.conf /etc/fdfs/http.conf
 	fi
 
+	if [ ! -f /etc/fdfs/mime.types ];then
+		cp -rf ${APP_DIR}/fastdfs-${VERSION}/conf/mime.types /etc/fdfs/mime.types
+	fi
+
 	echo $VERSION > $serverPath/fastdfs/version.pl
 
 	# rm -rf ${APP_DIR}/fastdfs-${VERSION}
