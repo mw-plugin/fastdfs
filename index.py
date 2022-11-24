@@ -101,6 +101,9 @@ def contentReplace(content):
     content = content.replace('{$SERVER_PATH}', service_path)
     content = content.replace(
         '{$SERVER_APP}', service_path + '/' + getPluginName())
+
+    content = content.replace('{$STORAGED_DIR}', '/www/fastdfs')
+
     return content
 
 
