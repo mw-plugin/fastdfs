@@ -77,11 +77,15 @@ Install_App()
 
 	if [ ! -d /etc/fdfs ];then
 		cd ${APP_DIR}/fastdfs-${VERSION} && ./make.sh && ./make.sh install
-		cp -rf conf/http.conf /etc/fdfs/http.conf
 		echo 'install fastdfs' > $install_tmp
 	else 
 		echo "fastdfs already install"
 	fi
+
+	if [ ! -f /etc/fdfs/http.conf ];then
+		cp -rf conf/http.conf /etc/fdfs/http.conf
+	fi
+
 	echo $VERSION > $serverPath/fastdfs/version.pl
 
 	# rm -rf ${APP_DIR}/fastdfs-${VERSION}
