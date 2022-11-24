@@ -8,8 +8,7 @@ Type=forking
 ExecStart=/usr/bin/fdfs_storaged {$SERVER_APP}/conf/storage.conf start
 ExecStop=/usr/bin/fdfs_storaged {$SERVER_APP}/conf/storage.conf stop
 
-# No artificial start/stop timeout
-TimeoutSec=0
+RemainAfterExit=yes
 
 # Disable OOM kill by Linux kernel
 OOMScoreAdjust=-1000
