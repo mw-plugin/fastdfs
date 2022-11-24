@@ -115,7 +115,7 @@ def initDreplace():
         conf_list = ['client.conf', 'storage.conf',
                      'storage_ids.conf', 'tracker.conf']
 
-        conf_dir = getServerDir() + '/conf/' + cl
+        conf_dir = getServerDir() + '/conf'
         if not os.path.exists(conf_dir):
             mw.execShell('mkdir -p ' + conf_dir)
 
