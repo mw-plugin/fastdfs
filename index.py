@@ -16,6 +16,8 @@ if mw.isAppleSystem():
     app_debug = True
 
 
+# python3 plugins/fastdfs/index.py start 6.09
+
 def getPluginName():
     return 'fastdfs'
 
