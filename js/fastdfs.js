@@ -54,7 +54,8 @@ function secToTime(s) {
 
 function ftEdit(){
     ftPost('ft_edit',{} , function(data){
-        var rdata = $.parseJSON(data.data);
+        var data = $.parseJSON(data.data);
+        var rdata = data.data;
         var edit = '<p class="status">通用的手动编辑:</p>';
         var c = '';
         for (var i = 0; i < rdata.length; i++) {
