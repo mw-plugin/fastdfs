@@ -40,7 +40,7 @@ def getConfTpl():
 
 
 def getConf():
-    path = getServerDir() + "/storage.conf"
+    path = getServerDir() + "/conf/storage.conf"
     return path
 
 
@@ -221,7 +221,8 @@ def runLog():
     content = mw.readFile(path)
     rep = 'base_path\s*=\s*(.*)'
     tmp = re.search(rep, content)
-    return tmp.groups()[0]
+    log = tmp.groups()[0] + "/logs/storaged.log"
+    return log
 
 
 def getPort():
