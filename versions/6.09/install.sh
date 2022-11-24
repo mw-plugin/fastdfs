@@ -83,7 +83,7 @@ Install_App()
 	fi
 
 	if [ ! -f /etc/fdfs/http.conf ];then
-		cp -rf conf/http.conf /etc/fdfs/http.conf
+		cp -rf ${APP_DIR}/fastdfs-${VERSION}/conf/http.conf /etc/fdfs/http.conf
 	fi
 
 	echo $VERSION > $serverPath/fastdfs/version.pl
