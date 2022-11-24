@@ -143,6 +143,7 @@ def initDreplace():
             pser = mw.systemdCfgDir() + '/' + cl_ll
             content = mw.readFile(pser_tpl)
             content = contentReplace(content)
+            print(pser)
             mw.writeFile(pser, content)
         # mw.execShell('systemctl daemon-reload')
         mw.writeFile(install_ok, 'ok')
