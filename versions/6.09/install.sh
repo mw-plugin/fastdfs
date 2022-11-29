@@ -65,7 +65,7 @@ Install_App()
 	# wget -O /www/server/source/fastdfs/fastdfs-V6.09.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V6.09.tar.gz
 	if [ ! -f ${APP_DIR}/fastdfs-${VERSION}.tar.gz ];then
 		if [ $sysName == 'Darwin' ]; then
-			wget -O ${APP_DIR}/fastdfs-V${VERSION}.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
+			wget  --no-check-certificate -O ${APP_DIR}/fastdfs-V${VERSION}.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
 		else
 			curl -sSLo ${APP_DIR}/fastdfs-V${VERSION}.tar.gz https://github.com/happyfish100/fastdfs/archive/refs/tags/V${VERSION}.tar.gz
 		fi
